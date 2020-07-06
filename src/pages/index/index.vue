@@ -14,26 +14,8 @@ export default {
       title: "Hello"
     };
   },
-  created() {
-    //#ifdef H5
-    // this.weWebLogin();
-    console.log("12312");
-
-    this.$u.route({ url: "pages/auth/login" });
-    //#endif
-    //#ifdef MP-WEIXIN
-    this.weMpLogin();
-    //#endif
-  },
+  created() {},
   methods: {
-    weWebLogin() {
-      console.log(this.$route.params);
-
-      this.$u.api.getLoginUrl();
-      let token = "zxcvsfaasdfsadf";
-      this.setToken(token);
-      console.log("h5登录");
-    },
     weMpLogin() {
       let token = "asdfsadfsadf";
       this.setToken(token);

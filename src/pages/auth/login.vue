@@ -3,31 +3,30 @@
 </template>
 <script>
 export default {
-  /**
-   * 在组件被激活前执行的操作
-   */
-  async beforeRouteEnter(to, from, next) {
-    const code = to.query.code;
-
+  onLoad: function(option) {
+    //option为object类型，会序列化上个页面传递的参数
+    const code = option.code;
     if (code === undefined) {
-      console.log(location.origin);
-      console.log(to.fullPath);
-
-      location = data.url;
-    } else {
-      next();
+      //获取微信登录链接
+      let url = location.origin + "/#/pages/auth/login";
+      this.$u.api.getLoginUrl(url);
+      location = url;
     }
+    //#ifdef H5
+    else {
+      this.weWebLogin(code);
+    }
+    //#endif
   },
   created() {
-    //#ifdef H5
-    this.weWebLogin();
-    //#endif
     //#ifdef MP-WEIXIN
     this.weMpLogin();
     //#endif
   },
   methods: {
-    weWebLogin() {
+    async weWebLogin(code) {
+      console.log(code);
+      let data = await this.$u.api.getToken(code);
       let token = "zxcvsfaasdfsadf";
       this.setToken(token);
       console.log("h5登录");
