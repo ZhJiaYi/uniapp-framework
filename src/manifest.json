@@ -50,6 +50,11 @@
 			}
 		}
 	},
+	"h5":{
+		"devServer": {
+			"disableHostCheck": true // 解决 127.0.0.1 指向其他域名时出现“Invalid Host header" 的问题
+		}
+	},
 	"quickapp": { /* 快应用特有相关 */
 
 	},
